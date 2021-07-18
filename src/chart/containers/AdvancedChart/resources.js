@@ -1,36 +1,36 @@
 // Required imports from chartiq for advanced chart
 
-import { CIQ } from 'chartiq/js/chartiq';
-import 'chartiq/js/advanced';
+import { CIQ } from 'chartiq/js/chartiq'
+import 'chartiq/js/advanced'
 
-import 'chartiq/js/advanced';
+import 'chartiq/js/advanced'
 
-import 'chartiq/js/addOns';
+import 'chartiq/js/addOns'
 
 // Symbol mapping to market definition
-import 'chartiq/examples/markets/marketDefinitionsSample';
-import 'chartiq/examples/markets/marketSymbologySample';
+import 'chartiq/examples/markets/marketDefinitionsSample'
+import 'chartiq/examples/markets/marketSymbologySample'
 
-import 'chartiq/examples/feeds/symbolLookupChartIQ';
+import 'chartiq/examples/feeds/symbolLookupChartIQ'
 
-import 'chartiq/examples/translations/translationSample';
+import 'chartiq/examples/translations/translationSample'
 
-import 'chartiq/js/componentUI';
-import 'chartiq/js/components';
+import 'chartiq/js/componentUI'
+import 'chartiq/js/components'
 
 // Event Markers
-import marker from 'chartiq/examples/markers/markersSample.js';
-import 'chartiq/examples/markers/tradeAnalyticsSample';
-import 'chartiq/examples/markers/videoSample';
+import marker from 'chartiq/examples/markers/markersSample.js'
+import 'chartiq/examples/markers/tradeAnalyticsSample'
+import 'chartiq/examples/markers/videoSample'
 
-import quoteFeed from "chartiq/examples/feeds/quoteFeedSimulator.js";
+import quoteFeed from 'chartiq/examples/feeds/quoteFeedSimulator.js'
 
 // Uncomment the following for the forecasting simulator (required for the forecasting sample).
 // import forecastQuoteFeed from "chartiq/examples/feeds/quoteFeedForecastSimulator.js";
 
-import PerfectScrollbar from "chartiq/js/thirdparty/perfect-scrollbar.esm.js";
+import PerfectScrollbar from 'chartiq/js/thirdparty/perfect-scrollbar.esm.js'
 
-import defaultConfig from 'chartiq/js/defaultConfiguration';
+import defaultConfig from 'chartiq/js/defaultConfiguration'
 
 // Plugins
 
@@ -70,24 +70,24 @@ function getConfig() {
 		quoteFeed,
 		// forecastQuoteFeed, // uncomment to enable forecast quote feed simulator
 		markerSample: marker.MarkersSample,
-		scrollStyle: PerfectScrollbar,
-	});
+		scrollStyle: PerfectScrollbar
+	})
 }
 
 // Creates a complete customised configuration object
 function getCustomConfig({ chartId, symbol, onChartReady } = {}) {
-	const config = getConfig();
+	const config = getConfig()
 
 	// Update chart configuration by modifying default configuration
-	config.chartId = chartId || "_advanced-chart";
+	config.chartId = chartId || '_advanced-chart'
 	config.initialSymbol = symbol || {
-		symbol: "AAPL",
-		name: "Apple Inc",
-		exchDisp: "NASDAQ"
-	};
+		symbol: 'AAPL',
+		name: 'Apple Inc',
+		exchDisp: 'NASDAQ'
+	}
 
 	// config.quoteFeeds[0].behavior.refreshInterval = 0; // disables quotefeed refresh
-	config.onChartReady = onChartReady;
+	config.onChartReady = onChartReady
 
 	const {
 		marketDepth,
@@ -95,7 +95,7 @@ function getCustomConfig({ chartId, symbol, onChartReady } = {}) {
 		tfc,
 		timeSpanEventPanel,
 		visualEarnings
-	} = config.plugins;
+	} = config.plugins
 	// Select only plugin configurations that needs to be active for this chart
 	config.plugins = {
 		// marketDepth,
@@ -103,13 +103,13 @@ function getCustomConfig({ chartId, symbol, onChartReady } = {}) {
 		// tfc,
 		// timeSpanEventPanel,
 		// visualEarnings
-	};
+	}
 
 	// Enable / disable addOns
 	// config.enabledAddOns.tooltip = false;
 	// config.enabledAddOns.continuousZoom = true;
 
-	return config;
+	return config
 }
 
-export { CIQ, getConfig, getCustomConfig };
+export { CIQ, getConfig, getCustomConfig }

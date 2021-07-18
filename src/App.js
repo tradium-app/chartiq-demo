@@ -1,13 +1,14 @@
 // import "./App.css";
-import "./chartiq/styles/base-imports";
-import AdvancedChart from "./chartiq/containers/AdvancedChart/index";
+import React from 'react'
+import './chart/styles/base-imports'
+import AdvancedChart from './chart/containers/AdvancedChart/index'
 
 function App() {
-  return (
-    <div className="App">
-      <AdvancedChart />
-    </div>
-  );
+	return (
+		<div className='App'>
+			<AdvancedChart />
+		</div>
+	)
 }
 
-export default App;
+export default App

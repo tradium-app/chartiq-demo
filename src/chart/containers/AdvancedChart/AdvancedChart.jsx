@@ -1,7 +1,7 @@
-import React from "react";
-import { CIQ } from "chartiq/js/componentUI";
+import React from 'react'
+import { CIQ } from 'chartiq/js/componentUI'
 
-import ChartTemplate from "./Template";
+import ChartTemplate from './Template'
 // Base styles required by the library to render color correctly.
 // If for some reason you are not including base-styles.css add these here.
 //import 'chartiq/css/stx-chart.css'; // Chart API
@@ -16,48 +16,48 @@ import ChartTemplate from "./Template";
  */
 export default class AdvancedChart extends React.Component {
 	constructor(props) {
-		super(props);
-		this.container = React.createRef();
+		super(props)
+		this.container = React.createRef()
 
 		this.state = {
 			chart: new CIQ.UI.Chart(),
 			stx: null,
 			UIContext: null,
 			chartInitializedCallback: props.chartInitialized
-		};
+		}
 	}
 
 	componentDidMount() {
-		const container = this.container.current;
-		const { chartInitializedCallback } = this.state;
-		let { config } = this.props;
+		const container = this.container.current
+		const { chartInitializedCallback } = this.state
+		let { config } = this.props
 
-		portalizeContextDialogs(container);
+		portalizeContextDialogs(container)
 		// Delay the call to createChartAndUI so any other AdvancedChart components on the page
 		// using multi chart setup have a chance to call portalizeContextDialogs
 		window.setTimeout(() => {
-			const uiContext = this.createChartAndUI({ container, config });
-			const chartEngine = uiContext.stx;
+			const uiContext = this.createChartAndUI({ container, config })
+			const chartEngine = uiContext.stx
 
-			this.setState({ stx: chartEngine, UIContext: uiContext });
+			this.setState({ stx: chartEngine, UIContext: uiContext })
 
 			if (chartInitializedCallback) {
-				chartInitializedCallback({ chartEngine, uiContext });
+				chartInitializedCallback({ chartEngine, uiContext })
 			}
-		}, 0);
+		}, 0)
 	}
 
 	componentWillUnmount() {
 		// Destroy the ChartEngine instance when unloading the component.
 		// This will stop internal processes such as quotefeed polling.
-		const { stx } = this.state;
-		stx.destroy();
-		stx.draw = () => {};
+		const { stx } = this.state
+		stx.destroy()
+		stx.draw = () => {}
 	}
 
 	createChartAndUI({ container, config }) {
-		const uiContext = this.state.chart.createChartAndUI({ container, config });
-		return uiContext;
+		const uiContext = this.state.chart.createChartAndUI({ container, config })
+		return uiContext
 	}
 
 	render() {
@@ -65,7 +65,7 @@ export default class AdvancedChart extends React.Component {
 			<cq-context ref={this.container}>
 				{this.props.children || <ChartTemplate />}
 			</cq-context>
-		);
+		)
 	}
 }
 
@@ -74,18 +74,18 @@ export default class AdvancedChart extends React.Component {
  * and move it outside context node to be shared by all chart components
  */
 function portalizeContextDialogs(container) {
-	container.querySelectorAll("cq-dialog").forEach((dialog) => {
-		dialog.remove();
+	container.querySelectorAll('cq-dialog').forEach((dialog) => {
+		dialog.remove()
 		if (!dialogPortalized(dialog)) {
-			document.body.appendChild(dialog);
+			document.body.appendChild(dialog)
 		}
-	});
+	})
 }
 
 function dialogPortalized(el) {
-	const tag = el.firstChild.nodeName.toLowerCase();
+	const tag = el.firstChild.nodeName.toLowerCase()
 	let result = Array.from(document.querySelectorAll(tag)).some(
-		(el) => !el.closest("cq-context")
-	);
-	return result;
+		(el) => !el.closest('cq-context')
+	)
+	return result
 }

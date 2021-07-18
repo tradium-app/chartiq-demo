@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 export default function ({ pluginToggles }) {
 	return (
@@ -393,5 +393,5 @@ export default function ({ pluginToggles }) {
 
 			<cq-side-panel></cq-side-panel>
 		</>
-	);
+	)
 }
